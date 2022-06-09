@@ -13,7 +13,7 @@ const RootStack = createStackNavigator()
 function AppNavigator() {
     return (
         <RootStack.Navigator 
-            intialRouteName="Splash"
+            intialRouteName={"Splash"}
             screenOptions={{headerShown: false}} 
             options={{gestureEnabled: true}}>
                 <RootStack.Screen 
