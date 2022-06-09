@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StatusBar, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import { MyText, CustomButton } from '../utils/common/index';
 import { wp, hp, fontSz } from '../utils/config';
 import SvgIcon from '../assets/svgs/splashscreen/storm.svg';
+import { getUser } from '../utils/helpers';
+import { setUserData } from '../redux/actions/index';
 
 interface SplashscreenProps {
     navigation?: NavigationProp
@@ -14,12 +17,27 @@ const HEIGHT = Dimensions.get('window').height
 const WIDTH = Dimensions.get('window').width
 
 const SplashScreen: React.FC<SplashscreenProps> = ({ navigation }) => {
+    const dispatch = useDispatch()
+    const [auth, setAuth] = useState(false);
+    useEffect(() => {
+        checkUser()
+    }, [])
+
     const toHome = () => {
-        navigation.navigate('Tabs')
+        navigation.replace('Tabs')
     }
 
     const toLogin = () => {
         navigation.navigate('Login')
+    }
+
+    const checkUser = async () => {
+       const user = await getUser()
+       if(user){
+           setAuth(true)
+           dispatch(setUserData(user))
+           navigation.replace('Tabs')
+       }
     }
 
     return(
@@ -42,7 +60,11 @@ const SplashScreen: React.FC<SplashscreenProps> = ({ navigation }) => {
                             Check Live weather updates all over the world with just one tap
                         </MyText>
                     <CustomButton 
-                        onPress={() => toLogin()}
+                        onPress={() => {
+                            auth ? toHome()
+                            :
+                            toLogin()
+                        }}
                         buttonText={'Get started'}
                     />
                 </View>

@@ -27,7 +27,8 @@ interface CustomInputProps {
     label?: String;
     errorMsg?: String;
     password?: Boolean;
-    secureTextEntry?: any;
+    secureTextEntry?: Boolean;
+    editable?: Boolean;
 }
 
 const CustomInput: React.FC<CustomInputProps> = (props) => {
@@ -63,7 +64,9 @@ const CustomInput: React.FC<CustomInputProps> = (props) => {
             iconPress,
             containerStyle,
             password,
-            secureTextEntry
+            secureTextEntry,
+            editable,
+            errorMsg,
     } = props;
     
     return(
@@ -75,13 +78,13 @@ const CustomInput: React.FC<CustomInputProps> = (props) => {
                     inputStyle, 
                     textInputStyle, 
                     textPoppins,
-                    {borderColor: error ? colors.magenta : borderColor},
+                    {borderColor: error ? '#DC143C' : borderColor},
                 ]}
                 onChangeText={onChangeText}
                 autoCorrect={false}
                 value={value}
                 onBlur={error ? onBlur : handleOnblur}
-                onFocus={() => setBorderColor(colors.purple)}
+                onFocus={() => setBorderColor(colors.white)}
                 autoCapitalize={autoCapitalize || 'none'}
                 placeholder={placeholder || ' '}
                 onChange={onChange}
@@ -89,18 +92,19 @@ const CustomInput: React.FC<CustomInputProps> = (props) => {
                 maxLength={maxLength}
                 multiline={multiline}
                 secureTextEntry={secureTextEntry && secure}
-                placeholderTextColor={placeholderColor || colors.grayOutline} 
+                placeholderTextColor={placeholderColor || colors.white} 
                 textAlignVertical={textAlignVertical || "center"}
                 ref={ref => inputRef = ref}
                 autoFocus={autoFocus}
+                editable={editable}
             />
             {password && 
                 <TouchableOpacity
                     hitSlop={hitslopConfig}
-                    style={{marginLeft: wp(-30)}} 
+                    style={{marginLeft: wp(-45)}} 
                     onPress={() => setSecure(secure => !secure)}>
-                    {secure ? <Icon name='ios-eye' color={'#CCD2E3B2'} size={fontSz(36)} />
-                    : <Icon name='ios-eye-off' color={'#CCD2E3B2'} size={fontSz(36)} />}
+                    {secure ? <Icon name='ios-eye' color={'#CCD2E3B2'} size={fontSz(30)} />
+                    : <Icon name='ios-eye-off' color={'#CCD2E3B2'} size={fontSz(30)} />}
                 </TouchableOpacity>}
             </View>
         </View>

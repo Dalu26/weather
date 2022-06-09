@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import GeneralStyles from '../../assets/styles/GeneralStyles';
 import { Spinner } from './Spinner';
 import { MyText } from './MyText';
@@ -63,7 +63,8 @@ const CustomButton: React.FC<CustomButtonProps>= (props) => {
 
     return (
       <View style={containerStyle}>
-        <Pressable
+        <TouchableOpacity
+            activeOpacity={0.8}
             onPress={onPress}
             onPressIn={onPressIn}
             onPressOut={onPressOut}
@@ -78,7 +79,7 @@ const CustomButton: React.FC<CustomButtonProps>= (props) => {
             <View style={contentContainer}>
                 {renderSpinnerOrText()}
             </View>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     );
 }
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   disabledStyles: {
-    backgroundColor: '#E5E5E8',
+    // backgroundColor: '#E5E5E8',
   },
 });
 
