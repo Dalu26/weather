@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiRootUrl = "https://nebula-core.herokuapp.com/v1/";
+const apiRootUrl = "https://api.tomorrow.io/v4/timelines?";
 
 const network = {
 	async request(url, method, data, options = {}) {
