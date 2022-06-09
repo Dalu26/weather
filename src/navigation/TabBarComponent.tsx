@@ -33,20 +33,20 @@ const MyTabBar: React.FC<MyTabBarprops> = ({ state, descriptors, navigation }) =
 
   const imagesObj = {
     home: {
-        inActive: <Home />,
-        isActive: <Home_One />
+        inActive: <Home height={hp(30)} width={wp(30)} />,
+        isActive: <Home_One height={hp(30)} width={wp(30)} />
     },
     search: {
-        inActive: <Search />,
-        isActive: <Search_One />
+        inActive: <Search height={hp(30)} width={wp(30)} />,
+        isActive: <Search_One height={hp(30)} width={wp(30)} />
     },
     compass: {
-        inActive: <Compass />,
-        isActive: <Compass_One />
+        inActive: <Compass height={hp(30)} width={wp(30)} />,
+        isActive: <Compass_One height={hp(30)} width={wp(30)} />
     },
     settings: {
-        inActive: <Settings />,
-        isActive: <Settings />
+        inActive: <Settings height={hp(30)} width={wp(30)} />,
+        isActive: <Settings height={hp(30)} width={wp(30)} />
     }
   }
 

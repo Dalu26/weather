@@ -7,6 +7,11 @@ import { wp, hp } from '../utils/config';
 const Search: React.FC<{}> = () => {
     return(
         <SafeAreaView style={styles.container}>
+            <StatusBar 
+                translucent={true} 
+                barStyle='light-content' 
+                backgroundColor="rgba(0,0,0,0)" 
+            />
             <MyText>Search Screen</MyText>
         </SafeAreaView>
     )
@@ -15,7 +20,8 @@ const Search: React.FC<{}> = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: hp(35)
+        paddingTop: hp(35),
+        // backgroundColor: '#431098'
     }
 })
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from "@react-navigation/native";
 import { enableScreens } from 'react-native-screens';
 import SplashScreen from '../screens/splashscreen';
 import Login from '../screens/login';
@@ -40,4 +41,10 @@ function AppNavigator() {
     )
 }
 
-export default AppNavigator
+export default function App() {
+    return (
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
+    );
+}
