@@ -11,7 +11,20 @@ export const wp = (val: number) => {
     return widthPercentageToDP(num);
 };
 
-export const API_KEY = 'KGs3wEraUXci716E1wJFzIsPEuIEpYPv';
-export const FIELDS = 'precipitationIntensity,precipitationType,windSpeed,windGust,windDirection,temperature,temperatureApparent,cloudCover,cloudBase,cloudCeiling,weatherCode'
+export const apikey = 'KGs3wEraUXci716E1wJFzIsPEuIEpYPv';
+export const fields = [
+    "precipitationIntensity",
+    "precipitationType",
+    "windSpeed",
+    "windGust",
+    "windDirection",
+    "temperature",
+    "temperatureApparent",
+    "cloudCover",
+    "cloudBase",
+    "cloudCeiling",
+    "weatherCode",
+];
+export const baseURL = "https://api.tomorrow.io/v4/timelines";
 
 export const fontSz = (val: number) => RFPercentage(val / 7.6);
