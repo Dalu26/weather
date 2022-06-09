@@ -6,9 +6,9 @@ import { useDispatch } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import { MyText, CustomButton } from '../utils/common/index';
 import { wp, hp, fontSz } from '../utils/config';
-import SvgIcon from '../assets/svgs/splashscreen/storm.svg';
 import { getUser } from '../utils/helpers';
 import { setUserData } from '../redux/actions/index';
+import SvgIcon from '../assets/svgs/splashscreen/storm.svg';
 
 interface SplashscreenProps {
     navigation?: NavigationProp
@@ -47,7 +47,7 @@ const SplashScreen: React.FC<SplashscreenProps> = ({ navigation }) => {
                 setAuth(true)
                 dispatch(setUserData(user))
                 navigation.replace('Tabs')
-           }, 3500)
+           }, 2000)
        }
     }
 

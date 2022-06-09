@@ -13,11 +13,11 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import moment from 'moment';
+import queryString from 'query-string';
 import Geolocation from 'react-native-geolocation-service';
 import { NavigationProp } from '@react-navigation/native';
 import { MyText } from '../utils/common/index';
-import { wp, hp, API_KEY, FIELDS, fontSz } from '../utils/config';
-import { getWeatherInfo } from '../utils/helpers';
+import { wp, hp, apikey, fields, fontSz, baseURL } from '../utils/config';
 import GStyles from '../assets/styles/GeneralStyles';
 import BackgroundImg from '../assets/svgs/home/backgroundImg.png';
 import ArrowRight from '../assets/svgs/home/arrow-right.svg';
@@ -39,46 +39,52 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
   const [forceLocation, setForceLocation] = useState(true);
   const [highAccuracy, setHighAccuracy] = useState(true);
   const [locationDialog, setLocationDialog] = useState(true);
-  const [significantChanges, setSignificantChanges] = useState(false);
-  const [observing, setObserving] = useState(false);
-  const [foregroundService, setForegroundService] = useState(false);
   const [useLocationManager, setUseLocationManager] = useState(false);
-  const [location, setLocation] = useState(null);
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [locale, setLocale] = useState(null);
+  const [weatherInfo, setWeatherInfo] = useState([])
+
   const timezone = 'Africa/Lagos';
   const now = moment.utc();
   const startTime = moment.utc(now).add(0, "minutes").toISOString();
   const endTime = moment.utc(now).add(1, "days").toISOString();
-  const timesteps = "current,1h,1d";
+  const timesteps = ["current", "1h", "1d"];
   const units = "imperial";
 
 
   useEffect(() => {
      getData()
-  }, [])
+  }, [weatherInfo])
 
   const getData = async () => {
-    await getLocation()
-    await getWeather()
+    await getLocation().then(async () => {
+      await getWeather()
+    })
   }
 
   const getWeather = async () => {
-    const latitude = location?.coords?.latitude;
-    const longitude = location?.coords?.longitude;
-    const locale = `${latitude},${longitude},`;
-    await getWeatherInfo(
-      locale,
-      FIELDS,
+    const latitude = locale?.coords?.latitude;
+    const longitude = locale?.coords?.longitude;
+    const location = [latitude, longitude];
+
+    const getTimelineParameters =  queryString.stringify({
+      apikey,
+      location,
+      fields,
+      units,
+      timesteps,
       startTime,
       endTime,
-      timesteps,
-      units,
-      timezone
-    ).then(response => {
-      console.log(response, 'weather')
-    }).catch(error => {
-      console.log(error)
+      timezone,
+    }, {arrayFormat: "comma"})
+
+    await fetch(baseURL + "?" + getTimelineParameters, {method: "GET", compress: true})
+    .then((result) => result.json())
+    .then((response) => {
+      const weather = response?.data?.timelines
+      console.log(weather)
+      setWeatherInfo(weather)
     })
+    .catch((error) => console.error("error: " + error))
   }
 
   const hasLocationPermission = async () => {
@@ -126,12 +132,12 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
 
     Geolocation.getCurrentPosition(
       (position) => {
-        setLocation(position);
+        setLocale(position);
         console.log(position, 'location');
       },
       (error) => {
         Alert.alert(`Code ${error.code}`, error.message);
-        setLocation(null);
+        setLocale(null);
         console.log(error);
       },
       {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, StatusBar, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StatusBar, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { MyText } from '../utils/common/index';
 import { wp, hp } from '../utils/config';
@@ -10,7 +10,7 @@ interface SettingsProp {
     navigation?: NavigationProp
 }
 
-const Settings: React.FC<NavigationProp> = ({ navigation }) => {
+const Settings: React.FC<SettingsProp> = ({ navigation }) => {
 
     const signOut = () => {
         clearData()

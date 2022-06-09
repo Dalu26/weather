@@ -1,7 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import network from "./network";
-import { API_KEY } from "./config";
-import axios from "axios";
 
 export const setUser = async (userData: object) => {
     try {
@@ -28,21 +25,4 @@ export const setUser = async (userData: object) => {
         return error;
     }
   }
-  
-export const getWeatherInfo = (
-    location, 
-    fields, 
-    startTime, 
-    endTime,
-    timesteps,
-    units,
-    timezone
-) => {
-    return new Promise((resolve, reject) => {
-        network.get(`apikey=KGs3wEraUXci716E1wJFzIsPEuIEpYPv&location=${location}&fields=${fields}&startTime=${startTime}&endTime=${endTime}&timesteps=${timesteps}&units=${units}&timezone=${timezone}`).then(response => {
-            resolve(response.data)
-        }).catch(error => {
-            reject(error)
-        })
-    })
-}
+

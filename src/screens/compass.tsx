@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, ScrollView, StatusBar, StyleSheet, SafeAreaView } from 'react-native';
+import { StatusBar, StyleSheet, SafeAreaView } from 'react-native';
 import { MyText } from '../utils/common/index';
-import { wp, hp } from '../utils/config';
+import { hp } from '../utils/config';
 
 
 const Compass: React.FC<{}> = () => {
