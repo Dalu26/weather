@@ -5,6 +5,7 @@ import { enableScreens } from 'react-native-screens';
 import SplashScreen from '../screens/splashscreen';
 import Login from '../screens/login';
 import Tabs from './TabNavigation';
+import Details from '../screens/details';
 
 enableScreens()
 
@@ -26,6 +27,13 @@ function AppNavigator() {
                 <RootStack.Screen 
                     name="Login" 
                     component={Login} 
+                    options={{ 
+                        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+                    }} 
+                />
+                <RootStack.Screen 
+                    name="Details" 
+                    component={Details} 
                     options={{ 
                         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
                     }} 
