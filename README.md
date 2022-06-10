@@ -1,7 +1,6 @@
 # Cassava HR Weather App
 
-A list of products and their hisorical prices.
-
+A mobile app for weather updates in your geographical location
 ## Contents
 
 - [Pre-requisites](#pre-requisites)
